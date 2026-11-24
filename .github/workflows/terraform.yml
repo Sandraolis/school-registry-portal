@@ -1,0 +1,37 @@
+name: terraform
+
+on:
+  push:
+    branches: [main]
+    paths: ["terraform/**", "backend/**", ".github/workflows/**"]
+  pull_request:
+    paths: ["terraform/**", "backend/**", ".github/workflows/**"]
+
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  terraform:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: terraform
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: hashicorp/setup-terraform@v3
+
+      - uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: arn:aws:iam::520235901263:role/github-actions-school-registry
+          aws-region: us-east-1
+
+      - run: terraform fmt -check
+      - run: terraform init
+      - run: terraform validate
+      - run: terraform plan -input=false
+
+      - name: Apply
+        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+        run: terraform apply -auto-approve -input=false
