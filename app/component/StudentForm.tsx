@@ -21,7 +21,7 @@ export default function StudentForm({ closeTab }: any) {
 
    const mutation = useMutation({
       mutationFn: (data: StudentType) => {
-         return fetch("http://localhost:3000/api/student", {
+         return fetch(`${process.env.NEXT_PUBLIC_API_URL}/student`, {
             method: "POST",
             headers: {
                "Content-Type": "application/json",

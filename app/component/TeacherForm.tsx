@@ -32,7 +32,7 @@ export default function TeacherForm({ closeTab }: any) {
 
    const mutation = useMutation({
       mutationFn: (data: TeacherType) => {
-         return fetch("http://localhost:3000/api/teacher", {
+         return fetch(`${process.env.NEXT_PUBLIC_API_URL}/teacher`, {
             method: "POST",
             headers: {
                "Content-Type": "application/json",
@@ -94,7 +94,7 @@ export default function TeacherForm({ closeTab }: any) {
                   <option value="Prof">Prof</option>
                </select>
 
-               {errors.name && (
+               {errors.title && (
                   <span className="text-sm text-red-400 italic font-thin text-start">
                      This field is required
                   </span>
@@ -164,11 +164,6 @@ export default function TeacherForm({ closeTab }: any) {
                   className="border h-10 rounded pl-4 focus:outline-none"
                   placeholder="Salary"
                />
-               {errors.teacherNumber && (
-                  <span className="text-sm text-red-400 italic font-thin text-start">
-                     This field is required
-                  </span>
-               )}
             </div>
 
             <button

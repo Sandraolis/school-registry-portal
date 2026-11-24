@@ -1,0 +1,21 @@
+# dependencies
+node_modules/
+
+# Next.js build output
+.next/
+out/
+next-env.d.ts
+
+# environment files
+.env
+.env*.local
+
+# Terraform (state can contain sensitive data)
+terraform/.terraform/
+terraform/*.tfstate
+terraform/*.tfstate.*
+terraform/handler.zip
+
+# misc
+.DS_Store
+*.log

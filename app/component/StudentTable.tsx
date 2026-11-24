@@ -28,7 +28,7 @@ const style = {
 
 const StudentTable = () => {
    const fetchStudentData = async () => {
-      const response = await fetch("http://localhost:3000/api/student");
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/student`);
       if (!response.ok) {
          throw new Error("Network response was not ok");
       }
